@@ -29,6 +29,11 @@ float VendingMachine::AddFunds()
 }
 
 
+Selection VendingMachine::MakeSelection()
+{
+	
+}
+
 
 void VendingMachine::PrintFunds(float funds) const
 {

@@ -8,6 +8,17 @@
 #define cin std::cin
 
 
+
+enum class Selection
+{
+	Item1,
+	Item2,
+	Item3,
+	Item4,
+	AddFunds,
+	Cancel
+};
+
 class VendingMachine
 {
 public:
@@ -15,6 +26,7 @@ public:
 
 	void PrintIntro() const;
 
+	Selection MakeSelection();
 
 	void PrintFunds(float) const;
 	float AddFunds();
