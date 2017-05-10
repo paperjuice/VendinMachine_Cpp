@@ -6,15 +6,27 @@
 
 int main()
 {
-	VendingMachine _v;
-
-	float Funds;
+	VendingMachine* VM = new VendingMachine();
+	Selection selection;
+	string Answer = 0;
 	
-	_v.PrintIntro();
+
+
+	while (true)
+	{
+		VM->PrintIntro();
+
+		selection = VM->AddFundsOrPickItem();
+		
+
+		VM->PickItem();
+
+	}
+
+
+
+
 	
-	Funds = _v.AddFunds();
-	_v.PrintFunds(Funds);
-
-
+	delete VM;
 	return 0;
 }
