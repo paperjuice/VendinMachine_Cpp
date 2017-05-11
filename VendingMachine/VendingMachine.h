@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 
 
 #define cout std::cout
@@ -29,9 +30,10 @@ public:
 
 	void PrintIntro(float) const;
 
-	Selection PickItem();
+	Selection PickItem(float);
 
 	Selection AddFundsOrPickItem() ;
+	float ProcessFunds(float PriceOfItem);
 
 	void PrintFunds(float) const;
 	float AddFunds();

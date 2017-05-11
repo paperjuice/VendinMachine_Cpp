@@ -10,12 +10,15 @@ VendingMachine::VendingMachine()
 
 void VendingMachine::PrintIntro(float Funds) const
 {
+	system("cls");
+
 	cout << "Vending Machine" << endl;
 	cout << endl;
+	cout << "Funds: " << Funds << endl;
+	cout << "_____________________" << endl;
+	cout << "What do you wanna do?" << endl;
 	cout << "1. Inser Money" << endl;
 	cout << "2. Make Selection" << endl;
-	cout << "_____________________" << endl;
-	cout << "Funds: " << Funds << endl;
 }
 
 float VendingMachine::AddFunds()
@@ -25,6 +28,18 @@ float VendingMachine::AddFunds()
 	cin >> AmountInserted;
 
 	return AmountInserted;
+}
+
+float VendingMachine::ProcessFunds(float Price)
+{
+	string temp = "";
+	cout << "Processing Order"<<endl;
+	cout << "................" << endl;
+	cout << "Order processed" << endl;
+	cout << "Press ANY KEY to continue" << endl;
+	cin >> temp;
+	system("cls");
+	return Price;
 }
 
 Selection VendingMachine::AddFundsOrPickItem() 
@@ -53,20 +68,22 @@ Selection VendingMachine::AddFundsOrPickItem()
 			cout << "Choose one of the above" << endl;
 			IsRepeting = true;
 		}
-		
 	}
+	return Selection::Cancel;
 }
 
-Selection VendingMachine::PickItem()
+Selection VendingMachine::PickItem(float Funds) 
 {
 	system("cls");
-	cout << "1. Item1" << endl;
-	cout << "2. Item2" << endl;
-	cout << "3. Item3" << endl;
-	cout << "4. Item4" << endl;
-	cout << "5. AddFunds" << endl;
-	cout << "6. Cancel" << endl;
+	cout << "Funds: " <<Funds << endl;
 	cout << "_______________" << endl;
+	cout << "Pick an item:" << endl;
+	cout << "1. Item1 ........ 10£" << endl;
+	cout << "2. Item2 ........ 20£" << endl;
+	cout << "3. Item3 ........  5£" << endl;
+	cout << "4. Item4 ........ 15.5£" << endl;
+	cout << "5. AddFunds" << endl;
+	cout << "6. Request exchange" << endl;
 
 
 	string Answer = "";
@@ -94,11 +111,11 @@ Selection VendingMachine::PickItem()
 		{
 			return Selection::Item4;
 		}
-		else if (Answer[0] == 'a')
+		else if (Answer[0] == 'a' || Answer[0] == '5')
 		{
 			return Selection::AddFunds;
 		}
-		else if (Answer[0] == 'c' || Answer[0] == 'e')
+		else if (Answer[0] == 'c' || Answer[0] == 'e' || Answer[0] == '6')
 		{
 			return Selection::Cancel;
 		}
@@ -108,6 +125,7 @@ Selection VendingMachine::PickItem()
 			cout << "Select one of the above!"<<endl;
 		}
 	}
+	return Selection::Cancel;
 }
 
 void VendingMachine::PrintFunds(float funds) const

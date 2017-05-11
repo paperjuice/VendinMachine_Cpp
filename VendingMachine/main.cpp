@@ -2,11 +2,11 @@
 #include "VendingMachine.h"
 
 
+VendingMachine* VM = new VendingMachine();
 
-
+float ProcessSelection(Selection);
 int main()
 {
-	VendingMachine* VM = new VendingMachine();
 	Selection selection;
 	float Funds = 0.0f;
 	string Answer = "";
@@ -26,20 +26,33 @@ int main()
 		else if (selection == Selection::PickItem)
 		{
 			VM->PrintFunds(Funds);
-			VM->PickItem();
-			
+			selection = VM->PickItem(Funds);
+			Funds -= ProcessSelection(selection);
 		}
 
-
-
-		VM->PickItem();
-
+		
 	}
-
-
-
-
 	
 	delete VM;
 	return 0;
+}
+
+float ProcessSelection(Selection Answer)
+{
+	switch (Answer)
+	{
+	case Selection::Item1:
+		return VM->ProcessFunds(10);
+		break;
+	case Selection::Item2:
+		return VM->ProcessFunds(20);
+		break;
+	case Selection::Item3:
+		return VM->ProcessFunds(5);
+		break;
+	case Selection::Item4:
+		return VM->ProcessFunds(15.5f);
+		break;
+	}
+
 }
