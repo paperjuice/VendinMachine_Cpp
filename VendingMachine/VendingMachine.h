@@ -27,7 +27,7 @@ class VendingMachine
 public:
 	VendingMachine();
 
-	void PrintIntro() const;
+	void PrintIntro(float) const;
 
 	Selection PickItem();
 
@@ -41,7 +41,7 @@ public:
 
 private:
 	string StringToLower(string);
-	float Funds = 0.f;
+	//float Funds = 0.f;
 
 	float AmountInserted = 0.f;
 

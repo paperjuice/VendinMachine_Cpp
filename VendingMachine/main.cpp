@@ -8,16 +8,29 @@ int main()
 {
 	VendingMachine* VM = new VendingMachine();
 	Selection selection;
-	string Answer = 0;
+	float Funds = 0.0f;
+	string Answer = "";
 	
 
 
 	while (true)
 	{
-		VM->PrintIntro();
+		VM->PrintIntro(Funds);
 
 		selection = VM->AddFundsOrPickItem();
-		
+
+		if (selection == Selection::AddFunds)
+		{
+			Funds += VM->AddFunds();
+		}
+		else if (selection == Selection::PickItem)
+		{
+			VM->PrintFunds(Funds);
+			VM->PickItem();
+			
+		}
+
+
 
 		VM->PickItem();
 

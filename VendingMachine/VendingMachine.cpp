@@ -8,8 +8,7 @@ VendingMachine::VendingMachine()
 }
 
 
-
-void VendingMachine::PrintIntro() const
+void VendingMachine::PrintIntro(float Funds) const
 {
 	cout << "Vending Machine" << endl;
 	cout << endl;
@@ -60,6 +59,16 @@ Selection VendingMachine::AddFundsOrPickItem()
 
 Selection VendingMachine::PickItem()
 {
+	system("cls");
+	cout << "1. Item1" << endl;
+	cout << "2. Item2" << endl;
+	cout << "3. Item3" << endl;
+	cout << "4. Item4" << endl;
+	cout << "5. AddFunds" << endl;
+	cout << "6. Cancel" << endl;
+	cout << "_______________" << endl;
+
+
 	string Answer = "";
 	bool Repete = true;
 
@@ -106,10 +115,10 @@ void VendingMachine::PrintFunds(float funds) const
 	cout << "Balance: " << funds << endl;
 }
 
-float VendingMachine::SetFunds(float amount) const
-{
-	return Funds + amount;
-}
+//float VendingMachine::SetFunds(float amount) const
+//{
+//	return Funds + amount;
+//}
 
 string VendingMachine::StringToLower(string StringOfWords)
 {
