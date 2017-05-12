@@ -25,9 +25,21 @@ int main()
 		}
 		else if (selection == Selection::PickItem)
 		{
-			VM->PrintFunds(Funds);
 			selection = VM->PickItem(Funds);
-			Funds -= ProcessSelection(selection);
+
+			if (selection != Selection::AddFunds || selection != Selection::Cancel)
+			{
+				Funds -= ProcessSelection(selection);
+			}
+			else if (selection == Selection::AddFunds)
+			{
+				Funds += VM->AddFunds();
+			}
+			else if (selection == Selection::Cancel)
+			{
+				//TODO: add behaviour
+			}
+
 		}
 
 		
@@ -52,6 +64,9 @@ float ProcessSelection(Selection Answer)
 		break;
 	case Selection::Item4:
 		return VM->ProcessFunds(15.5f);
+		break;
+	default: 
+		return 0;
 		break;
 	}
 

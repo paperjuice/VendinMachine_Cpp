@@ -37,7 +37,7 @@ float VendingMachine::ProcessFunds(float Price)
 	cout << "................" << endl;
 	cout << "Order processed" << endl;
 	cout << "Press ANY KEY to continue" << endl;
-	cin >> temp;
+	cin.ignore();
 	system("cls");
 	return Price;
 }
