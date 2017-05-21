@@ -24,10 +24,23 @@ void VendingMachine::PrintIntro(float Funds) const
 float VendingMachine::AddFunds()
 {
 	system("cls");
-	cout << "How much do you want to insert?"<<endl;
-	cin >> AmountInserted;
+	bool isRepeting = true;
 
-	return AmountInserted;
+	while (isRepeting)
+	{
+		cout << "How much do you want to insert?"<<endl;
+		cin >> AmountInserted;
+		if (AmountInserted >= 0)
+		{
+			return AmountInserted;
+		}
+		else if (AmountInserted < 0)
+		{
+			cout << "Insert a positive number."<<endl;
+			cout << endl;
+		}
+	}
+	return 0.0f;
 }
 
 float VendingMachine::ProcessFunds(float Price)
@@ -78,17 +91,15 @@ Selection VendingMachine::PickItem(float Funds)
 	cout << "Funds: " <<Funds << endl;
 	cout << "_______________" << endl;
 	cout << "Pick an item:" << endl;
-	cout << "1. Item1 ........ 10£" << endl;
-	cout << "2. Item2 ........ 20£" << endl;
-	cout << "3. Item3 ........  5£" << endl;
-	cout << "4. Item4 ........ 15.5£" << endl;
-	cout << "5. AddFunds" << endl;
+	cout << "1. " << std::get<0>(items[0]) << "........ " << std::get<1>(items[0]) << endl;
+	cout << "2. " << std::get<0>(items[1]) << "........ " << std::get<1>(items[1]) << endl;
+	cout << "3. " << std::get<0>(items[2]) << "........ " << std::get<1>(items[2]) << endl;
+	cout << "4. " << std::get<0>(items[3]) << "........ " << std::get<1>(items[3]) << endl;
 	cout << "6. Request exchange" << endl;
-
 
 	string Answer = "";
 	bool Repete = true;
-
+	
 	while (Repete)
 	{
 		Repete = false;
@@ -128,9 +139,22 @@ Selection VendingMachine::PickItem(float Funds)
 	return Selection::Cancel;
 }
 
+float VendingMachine::GetItemPrice(int position) const
+{
+	return std::get<1>(items[position]);
+}
+
 void VendingMachine::PrintFunds(float funds) const
 {
 	cout << "Balance: " << funds << endl;
+}
+
+float VendingMachine::ProcessExchange(float Funds)
+{
+	system("cls");
+	cout << Funds << " money returned." << endl;
+	cin.ignore();
+	return 0.f;
 }
 
 //float VendingMachine::SetFunds(float amount) const

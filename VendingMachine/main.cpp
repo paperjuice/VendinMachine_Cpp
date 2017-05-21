@@ -3,12 +3,14 @@
 
 
 VendingMachine* VM = new VendingMachine();
+float Funds = 0.0f;
 
 float ProcessSelection(Selection);
+float AskForMoreMoney(int);
+
 int main()
 {
 	Selection selection;
-	float Funds = 0.0f;
 	string Answer = "";
 	
 
@@ -27,17 +29,17 @@ int main()
 		{
 			selection = VM->PickItem(Funds);
 
-			if (selection != Selection::AddFunds || selection != Selection::Cancel)
-			{
-				Funds -= ProcessSelection(selection);
-			}
-			else if (selection == Selection::AddFunds)
+			if (selection == Selection::AddFunds)
 			{
 				Funds += VM->AddFunds();
 			}
 			else if (selection == Selection::Cancel)
 			{
-				//TODO: add behaviour
+				Funds = VM->ProcessExchange(Funds);
+			}
+			else 
+			{
+				Funds -= ProcessSelection(selection);
 			}
 
 		}
@@ -54,20 +56,34 @@ float ProcessSelection(Selection Answer)
 	switch (Answer)
 	{
 	case Selection::Item1:
-		return VM->ProcessFunds(10);
+		return AskForMoreMoney(0);
 		break;
 	case Selection::Item2:
-		return VM->ProcessFunds(20);
+		return AskForMoreMoney(1);
 		break;
 	case Selection::Item3:
-		return VM->ProcessFunds(5);
+		return AskForMoreMoney(2);
 		break;
 	case Selection::Item4:
-		return VM->ProcessFunds(15.5f);
+		return AskForMoreMoney(3);
 		break;
 	default: 
 		return 0;
 		break;
 	}
-
 }
+
+float AskForMoreMoney(int item)
+{
+	if (Funds >= VM->GetItemPrice(item))
+	{
+		return VM->ProcessFunds(VM->GetItemPrice(item));
+	}
+	else
+	{
+		cout << "You need more funds!";
+		cin.ignore();
+		return 0.f;
+	}
+}
+
